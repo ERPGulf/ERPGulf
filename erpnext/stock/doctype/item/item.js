@@ -93,7 +93,7 @@ frappe.ui.form.on("Item", {
 
 		erpnext.item.edit_prices_button(frm);
 		erpnext.item.toggle_attributes(frm);
-		
+
 		if (!frm.doc.is_fixed_asset) {
 			erpnext.item.make_dashboard(frm);
 		}
@@ -155,8 +155,26 @@ frappe.ui.form.on("Item", {
 		// set serial no to false & toggles its visibility
 		frm.set_value('has_serial_no', 0);
 		frm.toggle_enable(['has_serial_no', 'serial_no_series'], !frm.doc.is_fixed_asset);
-		frm.toggle_reqd(['asset_category'], frm.doc.is_fixed_asset);
-		frm.toggle_display(['has_serial_no', 'serial_no_series'], !frm.doc.is_fixed_asset);
+		frm.toggle_display(
+			[
+				'has_serial_no',
+				'serial_no_series',
+				'is_stock_item',
+				'show_in_website',
+				'hub_publishing_sb',
+				'is_item_from_hub',
+				'include_item_in_manufacturing',
+				'customer_details',
+				'inspection_criteria',
+				'sales_details',
+				'defaults',
+				'over_delivery_receipt_allowance',
+				'over_billing_allowance',
+				'supplier_details',
+				'taxes',
+			],
+			!frm.doc.is_fixed_asset
+		);
 
 		frm.call({
 			method: "set_asset_naming_series",
